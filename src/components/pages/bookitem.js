@@ -1,7 +1,9 @@
 import React from 'react';
 import {Row,Col,Well,Button} from 'react-bootstrap';
+import {connect} from 'react-redux';
+import {} from ''
 
-export default class BookItem extends React.Component{
+class BookItem extends React.Component{
   render(){
     return(
     <Well>
@@ -9,8 +11,8 @@ export default class BookItem extends React.Component{
           <Col xs={12}>
             <h6>{this.props.title}</h6>
             <p>{this.props.description}</p>
-            <h6>$ {this.props.price}</h6>
-            <Button bsStyle="primary">Button</Button>
+            <h6>{this.props.price}</h6>
+            <Button bsStyle="primary">Buy Now</Button>
             </Col>
         </Row>
 
@@ -18,3 +20,9 @@ export default class BookItem extends React.Component{
   );
   }
 }
+
+function mapStateToProp(state){
+  book: state.book.book;
+}
+
+export default connect(mapStateToProp)(BookItem)
