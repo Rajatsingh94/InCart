@@ -43,6 +43,12 @@ store.dispatch(postBooks(
       title:'This is second book',
       description:'This is second book description',
       price: 250
+    },
+    {
+      id:3,
+      title:'This is second book',
+      description:'This is second book description',
+      price: 450
     }
   ]
 
@@ -51,11 +57,11 @@ store.dispatch(postBooks(
 store.dispatch(deleteBooks({id:3}))
 
 store.dispatch(updateBooks({
-  id:3,
+  id:1,
   title:"learn react"
 }))
 
 
 //cart dispatches
 
-store.dispatch(addToCart([{id: 2}]))
+store.dispatch(addToCart([{id: 1}]))

@@ -10431,18 +10431,23 @@ store.dispatch((0, _bookActions.postBooks)([{
   title: 'This is second book',
   description: 'This is second book description',
   price: 250
+}, {
+  id: 3,
+  title: 'This is second book',
+  description: 'This is second book description',
+  price: 450
 }]));
 
 store.dispatch((0, _bookActions.deleteBooks)({ id: 3 }));
 
 store.dispatch((0, _bookActions.updateBooks)({
-  id: 3,
+  id: 1,
   title: "learn react"
 }));
 
 //cart dispatches
 
-store.dispatch((0, _cartActions.addToCart)([{ id: 2 }]));
+store.dispatch((0, _cartActions.addToCart)([{ id: 1 }]));
 
 /***/ }),
 /* 156 */
@@ -27756,7 +27761,7 @@ var BookList = function (_React$Component) {
     key: 'render',
     value: function render() {
       //  console.log(this.props.books);
-      var bookList = this.props.books.map(function (bookarr) {
+      var bookList = this.props.books.map(function (bookarr, key) {
         return _react2.default.createElement(
           _reactBootstrap.Col,
           { xs: 12, sm: 6, md: 4, key: bookarr.id },
@@ -41523,6 +41528,14 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactBootstrap = __webpack_require__(109);
 
+var _reactRedux = __webpack_require__(98);
+
+var _redux = __webpack_require__(62);
+
+var _reactDom = __webpack_require__(13);
+
+var _bookActions = __webpack_require__(348);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41541,6 +41554,16 @@ var BookForm = function (_React$Component) {
   }
 
   _createClass(BookForm, [{
+    key: 'handleSubmit',
+    value: function handleSubmit() {
+      var book = [{
+        title: (0, _reactDom.findDOMNode)(this.refs.title).value,
+        description: (0, _reactDom.findDOMNode)(this.refs.description).value,
+        price: (0, _reactDom.findDOMNode)(this.refs.price).value
+      }];
+      this.props.postBooks(book);
+    }
+  }, {
     key: 'render',
     value: function render() {
 
@@ -41594,7 +41617,7 @@ var BookForm = function (_React$Component) {
           ),
           _react2.default.createElement(
             _reactBootstrap.Button,
-            { bsStyle: 'primary' },
+            { onClick: this.handleSubmit.bind(this), bsStyle: 'primary' },
             'Save'
           )
         )
@@ -41605,7 +41628,11 @@ var BookForm = function (_React$Component) {
   return BookForm;
 }(_react2.default.Component);
 
-exports.default = BookForm;
+function mapDispatchToProp(dispatch) {
+  return (0, _redux.bindActionCreators)({ postBooks: _bookActions.postBooks }, dispatch);
+}
+
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProp)(BookForm);
 
 /***/ })
 /******/ ]);

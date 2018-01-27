@@ -8,7 +8,7 @@ import BookForm from '../pages/bookForms';
 class BookList extends React.Component{
   render(){
   //  console.log(this.props.books);
-    const bookList = this.props.books.map(function(bookarr){
+    const bookList = this.props.books.map(function(bookarr,key){
       return(
         <Col xs={12} sm={6} md={4} key={bookarr.id}>
           <BookItem
@@ -23,7 +23,7 @@ class BookList extends React.Component{
 
     return(
       <Grid>
-        <Col xs={12} sm={6} md={4}>
+        <Col xs={12} sm={6} md={4} >
           <BookForm />
         </Col>
         <Row style={{marginTop:'15px'}}>
