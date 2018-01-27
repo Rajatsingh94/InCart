@@ -12,9 +12,9 @@ class BookList extends React.Component{
    console.log('cart',this.props.cart);
     const bookList = this.props.books.map(function(bookarr){
       return(
-        <Col xs={12} sm={6} md={4} key={bookarr.id}>
+        <Col xs={12} sm={6} md={4} key={bookarr._id}>
           <BookItem
-            id={bookarr.id}
+            _id={bookarr._id}
             title={bookarr.title}
             description={bookarr.description}
             price={bookarr.price}
@@ -41,9 +41,7 @@ class BookList extends React.Component{
 
 function mapStateToProps(state)
 {
-  return{books: state.books.books,
-          cart: state.cart.cart
-        }
+  return{books: state.books.books}
 
 
 }

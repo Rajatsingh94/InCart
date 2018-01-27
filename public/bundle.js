@@ -27827,9 +27827,9 @@ var BookList = function (_React$Component) {
       var bookList = this.props.books.map(function (bookarr) {
         return _react2.default.createElement(
           _reactBootstrap.Col,
-          { xs: 12, sm: 6, md: 4, key: bookarr.id },
+          { xs: 12, sm: 6, md: 4, key: bookarr._id },
           _react2.default.createElement(_bookitem2.default, {
-            id: bookarr.id,
+            _id: bookarr._id,
             title: bookarr.title,
             description: bookarr.description,
             price: bookarr.price
@@ -27863,9 +27863,7 @@ var BookList = function (_React$Component) {
 }(_react2.default.Component);
 
 function mapStateToProps(state) {
-  return { books: state.books.books,
-    cart: state.cart.cart
-  };
+  return { books: state.books.books };
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(BookList);
@@ -41387,7 +41385,7 @@ var BookItem = function (_React$Component) {
     key: 'addCart',
     value: function addCart() {
       var book = [].concat(_toConsumableArray(this.props.cart), [{
-        id: this.props.id,
+        _id: this.props._id,
         title: this.props.title,
         description: this.props.description,
         price: this.props.price
@@ -41622,7 +41620,7 @@ function bookReducers() {
       var currentBookToDelete = [].concat(_toConsumableArray(state.books));
 
       var indexToDelete = currentBookToDelete.findIndex(function (book) {
-        return book.id === action.payload.id;
+        return book._id === action.payload._id;
       });
       return { books: [].concat(_toConsumableArray(currentBookToDelete.slice(0, indexToDelete)), _toConsumableArray(currentBookToDelete.slice(indexToDelete + 1))) };
       break;
@@ -41630,7 +41628,7 @@ function bookReducers() {
     case "UPDATE_BOOK":
       var currentBookToUpdate = [].concat(_toConsumableArray(state.books));
       var indexToUpdate = currentBookToUpdate.findIndex(function (book) {
-        return book.id === action.payload.id;
+        return book._id === action.payload._id;
       });
       var newBookToUpdate = _extends({}, currentBookToUpdate[indexToUpdate], {
         title: action.payload.title
@@ -41732,7 +41730,7 @@ var Cart = function (_React$Component) {
       var cartItemList = this.props.cart.map(function (cartArr) {
         return _react2.default.createElement(
           _reactBootstrap.Panel,
-          { key: cartArr.id },
+          { key: cartArr._id },
           _react2.default.createElement(
             _reactBootstrap.Row,
             null,
@@ -41742,7 +41740,60 @@ var Cart = function (_React$Component) {
               _react2.default.createElement(
                 'h6',
                 null,
-                this.props.title
+                cartArr.title
+              ),
+              _react2.default.createElement(
+                'span',
+                null,
+                '    '
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 12, sm: 2 },
+              _react2.default.createElement(
+                'h6',
+                null,
+                '$',
+                cartArr.price
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 12, sm: 2 },
+              _react2.default.createElement(
+                'h6',
+                null,
+                ' qty. ',
+                _react2.default.createElement(_reactBootstrap.Label, { bsStyle: 'success' })
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 6, sm: 4 },
+              _react2.default.createElement(
+                _reactBootstrap.ButtonGroup,
+                { style: { minWidth: '300px' } },
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { bsStyle: 'default', bsSize: 'small' },
+                  '-'
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { bsStyle: 'default', bsSize: 'small' },
+                  '+'
+                ),
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  '     '
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { bsStyle: 'danger', bsSize: 'small' },
+                  'Delete'
+                )
               )
             )
           )
