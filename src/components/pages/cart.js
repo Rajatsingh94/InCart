@@ -10,12 +10,12 @@ class Cart extends React.Component{
     {
       return this.renderCart();
     }else {
-      {
+
         return this.renderEmpty();
-      }
+
     }
   }
-}
+
 
 renderEmpty(){
   return (<div></div>)
@@ -40,9 +40,9 @@ renderCart(){
     </Panel>
   )
 }
-
-function mapStateToProp(state){
-  cart: state.cart.cart
+}
+function mapStateToProps(state){
+  return {cart: state.cart.cart}
 }
 
-export default connect(mapStateToProp)(Cart);
+export default connect(mapStateToProps)(Cart);

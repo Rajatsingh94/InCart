@@ -35,7 +35,7 @@ class BookItem extends React.Component{
 
 function mapStateToProp(state)
 {
-  cart: state.cart.cart
+    return {cart: state.cart.cart}
 }
 
 function mapDispatchToProp(dispatch){

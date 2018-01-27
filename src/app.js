@@ -46,7 +46,7 @@ store.dispatch(postBooks(
     },
     {
       id:3,
-      title:'This is second book',
+      title:'This is third book',
       description:'This is second book description',
       price: 450
     }
