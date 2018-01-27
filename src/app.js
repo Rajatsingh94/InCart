@@ -48,10 +48,10 @@ store.dispatch(postBooks(
 
 ))
 
-store.dispatch(deleteBooks({id:1}))
+store.dispatch(deleteBooks({id:3}))
 
 store.dispatch(updateBooks({
-  id:2,
+  id:3,
   title:"learn react"
 }))
 
