@@ -41,7 +41,9 @@ class BookList extends React.Component{
 
 function mapStateToProps(state)
 {
-  return{books: state.books.books}
+  return{books: state.books.books,
+        cart: state.cart.cart
+      }
 
 
 }

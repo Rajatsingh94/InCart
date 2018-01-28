@@ -63,5 +63,3 @@ store.dispatch(updateBooks({
 
 
 //cart dispatches
-
-store.dispatch(addToCart([{id: 1}]))
