@@ -9,8 +9,8 @@ import {deleteBooks} from './actions/bookActions';
 import {updateBooks} from './actions/bookActions';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
-
-import {Router,Route,browserHistory, hashHistory,IndexRoute} from 'react-router';
+import {Switch} from 'react-router';
+import {BrowserRouter,Route} from 'react-router-dom';
 import Cart from './components/pages/cart';
 import BookForm from './components/pages/bookForms';
 import Main from './main';
@@ -19,13 +19,15 @@ const store = createStore(reducers);
 
 const Routes = (
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={Main}>
-        <IndexRoute component={BookList} />
-        <Route path="/admin" component={BookForm} />
-        <Route path="/cart" component={Cart} />
-      </Route>
-    </Router>
+    <Main>
+    <BrowserRouter>
+      <Switch>
+      <Route exact path="/" component={BookList} />
+      <Route path="/admin" component={BookForm} />
+      <Route path="/cart" component={Cart} />
+      </Switch>
+    </BrowserRouter>
+    </Main>
   </Provider>
 )
 
