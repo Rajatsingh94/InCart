@@ -9,20 +9,28 @@ import {deleteBooks} from './actions/bookActions';
 import {updateBooks} from './actions/bookActions';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
-import Menu from './components/menu';
-import Footer from './components/footer';
+
+import {Router,Route,browserHistory, hashHistory,IndexRoute} from 'react-router';
+import Cart from './components/pages/cart';
+import BookForm from './components/pages/bookForms';
+import Main from './main';
 
 const store = createStore(reducers);
 
-render(
+const Routes = (
   <Provider store={store}>
-  <div>
-    <Menu />
-    <BookList />
-    <Footer />
-  </div>
-
+    <Router history={browserHistory}>
+      <Route path="/" component={Main}>
+        <IndexRoute component={BookList} />
+        <Route path="/admin" component={BookForm} />
+        <Route path="/cart" component={Cart} />
+      </Route>
+    </Router>
   </Provider>
+)
+
+render(
+  Routes
   ,document.getElementById('app')
 );
 
