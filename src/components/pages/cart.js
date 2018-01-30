@@ -1,7 +1,7 @@
 "use strict"
 import React from 'react';
 import {connect} from 'react-redux';
-import {Panel,Col,Row,Well,Button,ButtonGroup,Label} from 'react-bootstrap';
+import {Modal,Panel,Col,Row,Well,Button,ButtonGroup,Label} from 'react-bootstrap';
 import { deleteCartItem, updateCartItem} from '../../actions/cartActions';
 import {bindActionCreators} from 'redux';
 
@@ -51,6 +51,21 @@ renderEmpty(){
   return (<div></div>)
 }
 
+constructor(){
+  super();
+  this.state ={
+    show:false
+  }
+}
+
+open(){
+  this.setState({show:true})
+}
+
+handleClose(){
+  this.setState({show:false})
+}
+
 renderCart(){
   const cartItemList = this.props.cart.map(function(cartArr){
       return(
@@ -81,6 +96,29 @@ renderCart(){
   return (
     <Panel header="Cart" bsStyle="primary">
       {cartItemList}
+      <Row>
+        <Col xs={12}>
+          <h6>Total Amount: </h6>
+          <Button onClick={this.open.bind(this)} bsStyle="success" bsSize="small">
+            Proceed To Checkout
+          </Button>
+        </Col>
+      </Row>
+      <Modal show={this.state.show} onHide={this.handleClose.bind(this)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Thank you!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+              <h6>Your Order has been saved</h6>
+              <span>You will recieve a email confirmation soon</span>
+          </Modal.Body>
+          <Modal.Footer>
+            <Col xs={6}>
+              <h6>Total $:</h6>
+            </Col>
+            <Button onClick={this.handleClose.bind(this)}>Close</Button>
+          </Modal.Footer>
+        </Modal>
     </Panel>
   )
 }
