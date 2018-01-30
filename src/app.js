@@ -9,12 +9,19 @@ import {deleteBooks} from './actions/bookActions';
 import {updateBooks} from './actions/bookActions';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
+import Menu from './components/menu';
+import Footer from './components/footer';
 
 const store = createStore(reducers);
 
 render(
   <Provider store={store}>
-  <BookList />
+  <div>
+    <Menu />
+    <BookList />
+    <Footer />
+  </div>
+
   </Provider>
   ,document.getElementById('app')
 );
@@ -54,12 +61,6 @@ store.dispatch(postBooks(
 
 ))
 
-store.dispatch(deleteBooks({id:3}))
-
-store.dispatch(updateBooks({
-  id:1,
-  title:"learn react"
-}))
 
 
 //cart dispatches
