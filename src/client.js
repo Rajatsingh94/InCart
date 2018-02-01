@@ -51,29 +51,7 @@ render(
 
 
 // book dispatches
-store.dispatch(postBooks(
-  [
-    {
-      id:1,
-      title:'This is first book',
-      description:'This is first book description',
-      price: 150
-    },
-    {
-      id:2,
-      title:'This is second book',
-      description:'This is second book description',
-      price: 250
-    },
-    {
-      id:3,
-      title:'This is third book',
-      description:'This is second book description',
-      price: 450
-    }
-  ]
-
-))
+store.dispatch(postBooks([]))
 
 
 
