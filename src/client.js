@@ -14,8 +14,12 @@ import {BrowserRouter,Route} from 'react-router-dom';
 import Cart from './components/pages/cart';
 import BookForm from './components/pages/bookForms';
 import Main from './main';
+import {applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 
-const store = createStore(reducers);
+
+const middleware = applyMiddleware(thunk);
+const store = createStore(reducers,middleware);
 
 const Routes = (
   <Provider store={store}>
