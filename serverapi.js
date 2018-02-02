@@ -92,7 +92,30 @@ app.delete('/books',function(req,res){
 
 // update APIS
 
+// get book API
 
+app.get('/images',function(req,res){
+  const imgFolder = __dirname + '/public/images/';
+
+  //require file system//
+  const fs = require('fs');
+
+  fs.readdir(imgFolder,function(err,files){
+    if(err){
+      return console.error(err);
+    }
+    const filesArr =[];
+  //  var i = 1;
+    files.forEach(function(file){
+      filesArr.push({name:file});
+    //  i++
+    });
+    res.json(filesArr);
+  })
+})
+
+
+//
 
 
 //
