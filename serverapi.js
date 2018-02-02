@@ -5,12 +5,43 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+
 var app = express();
 
 // APIS
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/bookshop');
+
+var db = mongoose.connection;
+db.on('error',console.log.bind(console,'#Mongo - conenction error'));
+
+// --- set up session--->
+
+app.use(session({
+    secret:'mySecretString',
+    saveUninitialized:false,
+    resave:false,
+    cookie:{maxAge: 1000 *60 *60 *24 *2},
+    store: new MongoStore({mongooseConnection:db,ttl:2*24*60*60})
+}))
+
+//
+//save to session//
+app.post('/cart',function(req,res){
+  var cart = req.body;
+  req.session.cart= cart;
+  req.session.save(function(err){
+    if(err){
+      throw err;
+    }
+    res.join(req.session.cart);
+  })
+})
+
+//
 
 var Books = require('./models/books.js');
 //post book//
