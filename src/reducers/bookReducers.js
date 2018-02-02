@@ -10,7 +10,15 @@ export function bookReducers(state={books:[]},action)
 
 
     case "POST_BOOK":
-    return {books:[...state.books,...action.payload]}
+    return {books:[...state.books,...action.payload],msg:'Saved! CLick to Continue',style:'success'}
+    break;
+
+    case "POST_BOOK_REJECT"
+    return {...state,msg:'Please try again',style:'danger'}
+    break;
+
+    case "RESET_BUTTON"
+    return {...state,msg:null,style:'primary'}
     break;
 
     case "DELETE_BOOK":

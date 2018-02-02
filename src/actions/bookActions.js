@@ -59,3 +59,12 @@ export function updateBooks(book){
 
     }
 }
+
+export function resetButton(){
+    return {
+
+              type:"RESET_BUTTON",
+
+
+    }
+}
