@@ -1,28 +1,74 @@
 "use strict"
+
+import axios from 'axios';
+
+
+export function getCart(){
+  return function(dispatch){
+    axios.get('/api/cart')
+    .then(function(response){
+      dispatch({type:"GET_CART",payload:response.data})
+    })
+    .catch(function(err){
+      dispatch({type:"GET_CART_REJECTED",msg:"error while getting data from cart"})
+    })
+  }
+}
+
+
 //add to cart
-export function addToCart(book)
+export function addToCart(cart)
 {
-    return{
-      type: "ADD_TO_CART",
-      payload: book
+    return function(dispatch){
+      axios.post("/api/cart",cart)
+      .then(function(response){
+        dispatch({type:"ADD_TO_CART",payload:response.data})
+      })
+      .catch(function(err){
+        dispatch({type:"ADD_TO_CART_REJECTED",msg:"error when adding to cart"})
+      })
     }
 }
 
-//delete from cart
-export function deleteCartItem(book)
-{
-    return{
-      type: "DELETE_CART_ITEM",
-      payload: book
-    }
+// delete cart
+export function deleteCartItem(cart){
+  return function(dispatch){
+    axios.post("/api/cart",cart)
+    .then(function(response){
+      dispatch({type:"DELETE_CART_ITEM",payload:response.data})
+    })
+    .catch(function(err){
+      dispatch({type:"DELETE_CART_ITEM_REJECTED",msg:"error when adding to cart"})
+    })
+  }
 }
 
 //update cart
-export function updateCartItem(_id,unit)
+export function updateCartItem(_id,unit,cart)
 {
-    return{
-      type: "UPDATE_CART_ITEM",
-      _id:_id,
-      unit: unit
+    const currentBookToUpdate = cart
+    const indexToUpdate =currentBookToUpdate.findIndex(
+      function(book){
+        return book._id === _id;
+      }
+    )
+
+    const newBookToUpdate = {
+      ...currentBookToUpdate[indexToUpdate],
+      quantity: currentBookToUpdate[indexToUpdate].quantity+unit
     }
+
+    let cartUpdate = [...currentBookToUpdate.slice(0,indexToUpdate),newBookToUpdate,...currentBookToUpdate.slice(indexToUpdate+1)]
+
+    return function(dispatch){
+      axios.post("/api/cart",cartUpdate)
+      .then(function(response){
+        dispatch({type:"UPDATE_TO_CART",payload:response.data})
+      })
+      .catch(function(err){
+        dispatch({type:"UPDATE_TO_CART_REJECTED",msg:"error when updating to cart"})
+      })
+    }
+
+
 }

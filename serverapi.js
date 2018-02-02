@@ -39,7 +39,15 @@ app.post('/cart',function(req,res){
     }
     res.join(req.session.cart);
   })
-})
+});
+
+// get session cart API
+
+app.get('/cart',function(req,res){
+  if(typeof req.session.cart !=='undefined'){
+    res.json(req.session.cart);
+  }
+});
 
 //
 
