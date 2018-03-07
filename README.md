@@ -1,1 +1,1 @@
-# ShoopingCart-React/Redux App
+# InCart-React/Redux App
